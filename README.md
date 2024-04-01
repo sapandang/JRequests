@@ -10,14 +10,15 @@ For this all the methods are set as multi parameters.
 
 Select the version from the repo
 * https://central.sonatype.com/artifact/io.github.sapandang/Jrequests
-<br>
+
+
 * Add the version in your build tool
 * Gradle
-```agsl
+```groovy
 implementation 'io.github.sapandang:Jrequests:1.0'
 ```
 * Maven
-```agsl
+```xml
 <dependency>
     <groupId>io.github.sapandang</groupId>
     <artifactId>Jrequests</artifactId>
