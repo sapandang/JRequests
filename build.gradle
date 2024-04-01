@@ -1,11 +1,12 @@
+
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id 'java'
     id 'application'
-    id 'maven-publish'
-}
+    id "com.vanniktech.maven.publish" version "0.28.0"
 
-group = 'skd'
-version = '1.0'
+}
 
 repositories {
     mavenCentral()
@@ -25,8 +26,44 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20180813'
 }
 
-group = 'skd.requests'
+group = 'io.github.sapandang'
 version = '1.0'
+
+
+mavenPublishing {
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+    coordinates("io.github.sapandang", "Jrequests", "1.0")
+
+    pom {
+        name = "JRequests"
+        description = "A Simple java request library"
+        inceptionYear = "2024"
+        url = "https://github.com/sapandang/JRequests"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "sapandang"
+                name = "sapan"
+                url = "https://github.com/sapandang/"
+            }
+        }
+        scm {
+            url = "https://github.com/sapandang/JRequests"
+            connection = "scm:git:git://github.com/sapandang/JRequests.git"
+            developerConnection = "scm:git:ssh://git@github.com/sapandang/JRequests.git"
+        }
+    }
+}
+
+
 
 
 task customFatJar(type: Jar) {

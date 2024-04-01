@@ -6,8 +6,28 @@ This was earlier part of `https://github.com/sapandang/Load-Director`
 Aim is to provide simple syntax for sending requests.
 For this all the methods are set as multi parameters.
 
-## Usage
+## Add depedency
 
+Select the version from the repo
+* https://central.sonatype.com/artifact/io.github.sapandang/Jrequests
+<br>
+* Add the version in your build tool
+* Gradle
+```agsl
+implementation 'io.github.sapandang:Jrequests:1.0'
+```
+* Maven
+```agsl
+<dependency>
+    <groupId>io.github.sapandang</groupId>
+    <artifactId>Jrequests</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
+
+
+## Usage
 ### Get
 
 ```java
