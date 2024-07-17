@@ -1,4 +1,5 @@
 import okhttp3.*;
+import okhttp3.FormBody;
 import org.json.JSONArray;
 import skd.requests.*;
 import skd.requests.Headers;
@@ -9,13 +10,14 @@ import java.io.IOException;
 public class Test {
 
 
-    String BASE_URL="https://webhook.site/893c3b74-dc26-4100-a8e2-bc6527c06aba";
+    String BASE_URL="https://webhook.site/#!/view/29fc7c3e-3b07-4188-88a8-772ecee3c800";
 
 
     @org.junit.jupiter.api.Test
     public void multipartform(){
 
 
+        Requests.enableOkHttpDebug=true;
         Requests requests = new Requests();
 
         Headers headers = new Headers();
@@ -152,6 +154,8 @@ public class Test {
         test.getAsync();
         test.getAsync();
         test.getAsync();
+
+
     }
 
 

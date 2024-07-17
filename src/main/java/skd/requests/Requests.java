@@ -2,6 +2,8 @@ package skd.requests;
 
 import okhttp3.*;
 import okhttp3.FormBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import org.jetbrains.annotations.NotNull;
 import org.tinylog.Logger;
 
 
@@ -20,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Requests {
 
+    public static boolean enableOkHttpDebug=false;
     private OkHttpClient client;
     private  CookieHelper cookieHelper;
     private ArrayList<RequestsListners> mRequestsListnersArrayList = new ArrayList();
@@ -29,21 +32,44 @@ public class Requests {
        /* //set the client
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Dispatcher customDispatcher = new Dispatcher(executorService);
-*/
+       */
+
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         cookieHelper = new CookieHelper();
-        client = new OkHttpClient().newBuilder()
-                .readTimeout(1, TimeUnit.HOURS) //default timeout
-                .connectTimeout(1, TimeUnit.HOURS) //default timeout
+
+        //#--- create the ok http builder
+        OkHttpClient.Builder okBuilder = new OkHttpClient().newBuilder();
+        if(enableOkHttpDebug)
+        {
+//            okBuilder.addInterceptor(loggingInterceptor);
+            okBuilder.addNetworkInterceptor(new LoggingInterceptor());
+        }
+        okBuilder.readTimeout(1, TimeUnit.HOURS)
+                .connectTimeout(1, TimeUnit.HOURS)
                 .followRedirects(false)
                 .followSslRedirects(false)
-                .cookieJar(cookieHelper.cookieJar())
-                .build();
+                .cookieJar(cookieHelper.cookieJar());
+//                .cookieJar(new Cookieejar());
+
+        //#--- build the client
+        client = okBuilder.build();
+
+        //#--- set the dispatchers
         client.dispatcher().setMaxRequests(Integer.MAX_VALUE);
         client.dispatcher().setMaxRequestsPerHost(Integer.MAX_VALUE);
-
     }
 
+
+    /**
+     * pass custom okHttpBuilder
+     * @param okBuilder
+     */
+    public Requests(OkHttpClient.Builder okBuilder){
+        //#--- build the client
+        client = okBuilder.build();
+    }
 
 
 

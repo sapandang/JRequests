@@ -8,6 +8,12 @@ plugins {
 
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+
 repositories {
     mavenCentral()
 }
@@ -19,6 +25,8 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection")
+
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -27,14 +35,14 @@ dependencies {
 }
 
 group = 'io.github.sapandang'
-version = '1.0'
+version = '1.2'
 
 
 mavenPublishing {
 
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
-    coordinates("io.github.sapandang", "Jrequests", "1.0")
+    coordinates("io.github.sapandang", "Jrequests", "1.2")
 
     pom {
         name = "JRequests"
